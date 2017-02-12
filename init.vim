@@ -3,85 +3,93 @@
 set runtimepath^=/home/thinktainer/.config/nvim/plugins/dein.vim/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
+if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
+	call dein#begin(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
 
-" Let dein manage dein
-" Required:
-call dein#add('Shougo/dein.vim')
+	" Let dein manage dein
+	" Required:
+	call dein#add('Shougo/dein.vim')
 
-" Add or remove your plugins here:
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-call dein#add('fsharp/vim-fsharp', {'build': 'make fsautocomplete'})
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('kylef/apiblueprint.vim.git')
-call dein#add('Townk/vim-autoclose.git')
-call dein#add('chriskempson/base16-vim.git', {'rev': 'f3022fb1fdeff22f99a4b4278c8f44c1131836cd'})
-call dein#add('elixir-lang/vim-elixir.git')
-call dein#add('tpope/vim-fugitive.git')
-call dein#add('mattn/gist-vim.git', {'depends': 'mattn/webapi-vim'})
-call dein#add('mattn/webapi-vim')
-call dein#add('guns/vim-clojure-highlight')
-call dein#add('guns/vim-clojure-static')
-call dein#add('guns/vim-sexp')
-call dein#add('tpope/vim-leiningen')
-call dein#add('tpope/vim-sexp-mappings-for-regular-people')
-call dein#add('SevereOverfl0w/async-clj-omni')
-call dein#add('scrooloose/nerdcommenter.git')
-call dein#add('saltstack/salt-vim.git')
-call dein#add('scrooloose/syntastic.git')
-call dein#add('godlygeek/tabular.git')
-call dein#add('pivotal/tmux-config.git')
-call dein#add('edkolev/tmuxline.vim.git')
-call dein#add('sjl/tslime.vim.git')
-call dein#add('bling/vim-airline.git')
-call dein#add('vim-airline/vim-airline-themes')
-call dein#add('tpope/vim-bundler.git')
-call dein#add('tpope/vim-cucumber.git')
-call dein#add('tpope/vim-dispatch.git')
-call dein#add('tpope/vim-fireplace.git')
-call dein#add('facebook/vim-flow.git')
-call dein#add('pangloss/vim-javascript.git')
-call dein#add('mxw/vim-jsx.git')
-call dein#add('lepture/vim-jinja.git')
-call dein#add('elzr/vim-json.git')
-call dein#add('tpope/vim-characterize.git')
-call dein#add('tpope/vim-leiningen.git')
-call dein#add('tpope/vim-markdown.git')
-call dein#add('tpope/vim-projectionist.git')
-call dein#add('rodjek/vim-puppet.git')
-call dein#add('tpope/vim-ragtag.git')
-call dein#add('tpope/vim-rails.git')
-call dein#add('tpope/vim-rbenv.git')
-call dein#add('vim-ruby/vim-ruby.git')
-call dein#add('tpope/vim-surround.git')
-call dein#add('tpope/vim-unimpaired.git')
-call dein#add('jimenezrick/vimerl')
-call dein#add('Quramy/vison.git')
-call dein#add('hashivim/vim-terraform')
-call dein#add('Shougo/vimproc.vim')
-call dein#add('Shougo/unite.vim.git')
-call dein#add('elmcast/elm-vim')
-call dein#add('slim-template/vim-slim.git')
-call dein#add('KabbAmine/zeavim.vim')
-call dein#add('scrooloose/nerdtree.git')
-call dein#add('Shougo/vimshell')
-call dein#add('zchee/deoplete-go', { 'build': 'make' })
-call dein#add('majutsushi/tagbar')
-call dein#add('fatih/vim-go')
-call dein#add('zchee/deoplete-jedi')
-call dein#add('davidhalter/jedi-vim')
-call dein#add('lambdalisue/vim-pyenv', {'merged': 0})
-call dein#add('carlitux/deoplete-ternjs', {'build': 'npm i -g ternjs'})
-call dein#add('ternjs/tern_for_vim')
-
-" Required:
-call dein#end()
+	" Add or remove your plugins here:
+	call dein#add('/home/thinktainer/.config/nvim/plugins/dein.vim/repos/github.com/Shougo/dein.vim')
+	call dein#add('Shougo/neosnippet.vim')
+	call dein#add('Shougo/neosnippet-snippets')
+	call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+	call dein#add('fsharp/vim-fsharp', {'build': 'make fsautocomplete'})
+	call dein#add('Shougo/deoplete.nvim')
+	call dein#add('kylef/apiblueprint.vim.git')
+	call dein#add('Townk/vim-autoclose.git')
+	call dein#add('chriskempson/base16-vim.git')
+	call dein#add('elixir-lang/vim-elixir.git')
+	call dein#add('tpope/vim-fugitive.git')
+	call dein#add('mattn/gist-vim.git', {'depends': 'mattn/webapi-vim'})
+	call dein#add('mattn/webapi-vim')
+	call dein#add('guns/vim-clojure-highlight')
+	call dein#add('guns/vim-clojure-static')
+	call dein#add('guns/vim-sexp')
+	call dein#add('tpope/vim-leiningen')
+	call dein#add('tpope/vim-sexp-mappings-for-regular-people')
+	call dein#add('SevereOverfl0w/async-clj-omni')
+	call dein#add('scrooloose/nerdcommenter.git')
+	call dein#add('saltstack/salt-vim.git')
+	call dein#add('scrooloose/syntastic.git')
+	call dein#add('godlygeek/tabular.git')
+	call dein#add('pivotal/tmux-config.git')
+	call dein#add('edkolev/tmuxline.vim.git')
+	call dein#add('sjl/tslime.vim.git')
+	call dein#add('bling/vim-airline.git')
+	call dein#add('vim-airline/vim-airline-themes')
+	call dein#add('tpope/vim-bundler.git')
+	call dein#add('tpope/vim-cucumber.git')
+	call dein#add('tpope/vim-dispatch.git')
+	call dein#add('tpope/vim-fireplace.git')
+	call dein#add('facebook/vim-flow.git')
+	call dein#add('pangloss/vim-javascript.git')
+	call dein#add('mxw/vim-jsx.git')
+	call dein#add('lepture/vim-jinja.git')
+	call dein#add('elzr/vim-json.git')
+	call dein#add('tpope/vim-characterize.git')
+	call dein#add('tpope/vim-leiningen.git')
+	call dein#add('tpope/vim-markdown.git')
+	call dein#add('tpope/vim-projectionist.git')
+	call dein#add('rodjek/vim-puppet.git')
+	call dein#add('tpope/vim-ragtag.git')
+	call dein#add('tpope/vim-rails.git')
+	call dein#add('tpope/vim-rbenv.git')
+	call dein#add('vim-ruby/vim-ruby.git')
+	call dein#add('tpope/vim-surround.git')
+	call dein#add('tpope/vim-unimpaired.git')
+	call dein#add('jimenezrick/vimerl')
+	call dein#add('Quramy/vison.git')
+	call dein#add('hashivim/vim-terraform')
+	call dein#add('Shougo/vimproc.vim')
+	call dein#add('Shougo/unite.vim.git')
+	call dein#add('elmcast/elm-vim')
+	call dein#add('slim-template/vim-slim.git')
+	call dein#add('KabbAmine/zeavim.vim')
+	call dein#add('scrooloose/nerdtree.git')
+	call dein#add('Shougo/vimshell')
+	call dein#add('zchee/deoplete-go', { 'build': 'make' })
+	call dein#add('majutsushi/tagbar')
+	call dein#add('fatih/vim-go', {'rev': 'v1.11'})
+	call dein#add('zchee/deoplete-jedi')
+	call dein#add('davidhalter/jedi-vim')
+	call dein#add('lambdalisue/vim-pyenv', {'merged': 0})
+	call dein#add('carlitux/deoplete-ternjs', {'build': 'npm i -g tern'})
+	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
+	call dein#add('Omnisharp/omnisharp-vim', {'build': 'sh -c "cd server && xbuild"'})
+	" Required:
+	call dein#end()
+	call dein#save_state()
+endif
 
 " Required:
 filetype plugin indent on
+syntax enable
 
+if dein#check_install()
+	call dein#install()
+endif
 " If you want to install not installed plugins on startup.
 "if dein#check_install()
 "  call dein#install()
@@ -126,7 +134,7 @@ let g:jsx_ext_required = 0
 "autocmd bufwritepost *.js silent !standard-format -w %
 let g:syntastic_json_checkers = ['jsonlint']
 let g:tern_request_timeout = 1
-let g:tern#command = [$HOME."/.ndenv/versions/v4.4.7/bin/tern"]
+"let g:tern#command = [$HOME."/.ndenv/versions/v4.4.7/bin/tern"]
 let g:tern#arguments = ["--persistent"]
 au BufRead,BufNewFile *.json set filetype=json
 au FileType json setl sw=2 ts=2 et
@@ -137,7 +145,6 @@ augroup js
     au FileType javascript nnoremap <LocalLeader>d :TernDef<CR>
     au FileType javascript nnoremap <LocalLeader>r :TernRename<CR>
 augroup END
-    
 
 " reload changed files automatically
 set autoread
@@ -149,14 +156,11 @@ let NERDTreeIgnore=['\.beam$', '\~$']
 
 " airline
 let g:airline_powerline_fonts=1
+let g:airline_theme='base16'
 
 "editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
-
-
-"base16
-let base16colorspace=256  " Access colors present in 256 colorspace "
 
 "tslime
 let g:tslime_ensure_trailing_newlines=1
@@ -166,12 +170,21 @@ if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
 endif
 
+
+"unite
 call unite#custom#source(
         \ 'file,file/new,buffer,file_rec,file_rec/neovim',
         \ 'matchers', 'matcher_fuzzy')
-
 call unite#custom#source('file/rec_neovim,file_rec,file_rec/async', 'ignore_pattern', 'node_modules/')
-
+if executable('ag')
+  " Use ag (the silver searcher)
+  " https://github.com/ggreer/the_silver_searcher
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+  \ '-i --vimgrep --hidden --ignore ' .
+  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
 "use deoplete
 "neocomplete like
@@ -214,7 +227,6 @@ augroup END
 
 let g:fsharp_completion_helptext = 1
 
-
 " elm
 let g:elm_jump_to_error = 1
 let g:elm_make_output_file = "elm.js"
@@ -256,6 +268,29 @@ let g:go_snippet_engine = "neosnippet"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>m <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gr <Plug>(go-rename)
+au FileType go nmap <Leader>l <Plug>(go-metalinter)
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+let g:go_term_enabled = 1
+let g:go_term_mode = "split"
 
 " neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -266,3 +301,15 @@ let g:neosnippet#snippets_directory = "$XDG_CONFIG_HOME/nvim/snippets"
 
 " yaml
 au FileType yaml set shiftwidth=2
+
+" gist
+let g:gist_get_multiplefile = 1
+
+" csharp
+au FileType cs set shiftwidth=4 tabstop=4 expandtab
+
+" match parentheses
+let loaded_matchparen = 1
+
+vnoremap <Leader>64e c <c-r>=system('base64 -w0', @")<cr><esc>
+vnoremap <Leader>64d c <c-r>=system('base64 --decode', @")<cr><esc>
