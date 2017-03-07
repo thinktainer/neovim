@@ -15,7 +15,7 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
 	call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
 	call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-	call dein#add('fsharp/vim-fsharp', {'build': 'make fsautocomplete'})
+	call dein#add('fsharp/vim-fsharp', {'build': 'make fsautocomplete', 'rev': 'af5c5d810ebf38d907129f8c37bd3aeedf3869bd'})
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('kylef/apiblueprint.vim.git')
 	call dein#add('Townk/vim-autoclose.git')
@@ -77,6 +77,11 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
 	call dein#add('carlitux/deoplete-ternjs', {'build': 'npm i -g tern'})
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
 	call dein#add('Omnisharp/omnisharp-vim', {'build': 'sh -c "cd server && xbuild"'})
+	call dein#add('rust-lang/rust.vim')
+	call dein#add('racer-rust/vim-racer')
+	call dein#add('sebastianmarkow/deoplete-rust')
+	call dein#add('uarun/vim-protobuf')
+
 	" Required:
 	call dein#end()
 	call dein#save_state()
@@ -86,9 +91,6 @@ endif
 filetype plugin indent on
 syntax enable
 
-if dein#check_install()
-	call dein#install()
-endif
 " If you want to install not installed plugins on startup.
 "if dein#check_install()
 "  call dein#install()
@@ -281,6 +283,7 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gr <Plug>(go-rename)
 au FileType go nmap <Leader>l <Plug>(go-metalinter)
+au FileType go nmap <Leader>ct <Plug>(go-test-compile)
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -312,3 +315,8 @@ let loaded_matchparen = 1
 
 vnoremap <Leader>64e c <c-r>=system('base64 -w0', @")<cr><esc>
 vnoremap <Leader>64d c <c-r>=system('base64 --decode', @")<cr><esc>
+
+let g:deoplete#sources#rust#racer_binary='/home/thinktainer/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/home/thinktainer/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+let g:syntastic_rust_checkers=['rustc']
+
