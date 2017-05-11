@@ -1,0 +1,12 @@
+snippet     mw_str_ebd
+alias       struct embedded arg
+options     indent
+        ${1:name}: app.String(cli.StringOpt{
+                Name: "${2:$1}",
+                Desc: "${3:description}",
+                EnvVar: "${4:$2}",
+                Value: "${5:#:value}",
+        }),
+        ${0}
+
+

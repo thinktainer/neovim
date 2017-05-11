@@ -15,72 +15,102 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
 	call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
 	call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-	call dein#add('fsharp/vim-fsharp', {'build': 'make fsautocomplete', 'rev': 'af5c5d810ebf38d907129f8c37bd3aeedf3869bd'})
+	"call dein#add('fsharp/vim-fsharp', {'build': 'make fsautocomplete', 'rev': 'af5c5d810ebf38d907129f8c37bd3aeedf3869bd'})
 	call dein#add('Shougo/deoplete.nvim')
-	call dein#add('kylef/apiblueprint.vim.git')
 	call dein#add('Townk/vim-autoclose.git')
 	call dein#add('chriskempson/base16-vim.git')
-	call dein#add('elixir-lang/vim-elixir.git')
+	"call dein#add('elixir-lang/vim-elixir.git')
 	call dein#add('tpope/vim-fugitive.git')
+	call dein#add('tpope/vim-rhubarb.git')
 	call dein#add('mattn/gist-vim.git', {'depends': 'mattn/webapi-vim'})
 	call dein#add('mattn/webapi-vim')
-	call dein#add('guns/vim-clojure-highlight')
-	call dein#add('guns/vim-clojure-static')
-	call dein#add('guns/vim-sexp')
-	call dein#add('tpope/vim-leiningen')
-	call dein#add('tpope/vim-sexp-mappings-for-regular-people')
-	call dein#add('SevereOverfl0w/async-clj-omni')
+	"call dein#add('guns/vim-clojure-highlight')
+	"call dein#add('guns/vim-clojure-static')
+	"call dein#add('guns/vim-sexp')
+	"call dein#add('tpope/vim-leiningen')
+	"call dein#add('tpope/vim-sexp-mappings-for-regular-people')
+	"call dein#add('SevereOverfl0w/async-clj-omni')
 	call dein#add('scrooloose/nerdcommenter.git')
-	call dein#add('saltstack/salt-vim.git')
+	"call dein#add('saltstack/salt-vim.git')
 	call dein#add('scrooloose/syntastic.git')
 	call dein#add('godlygeek/tabular.git')
 	call dein#add('pivotal/tmux-config.git')
 	call dein#add('edkolev/tmuxline.vim.git')
-	call dein#add('sjl/tslime.vim.git')
+	"call dein#add('sjl/tslime.vim.git')
 	call dein#add('bling/vim-airline.git')
 	call dein#add('vim-airline/vim-airline-themes')
-	call dein#add('tpope/vim-bundler.git')
-	call dein#add('tpope/vim-cucumber.git')
-	call dein#add('tpope/vim-dispatch.git')
-	call dein#add('tpope/vim-fireplace.git')
-	call dein#add('facebook/vim-flow.git')
-	call dein#add('pangloss/vim-javascript.git')
-	call dein#add('mxw/vim-jsx.git')
-	call dein#add('lepture/vim-jinja.git')
-	call dein#add('elzr/vim-json.git')
-	call dein#add('tpope/vim-characterize.git')
-	call dein#add('tpope/vim-leiningen.git')
-	call dein#add('tpope/vim-markdown.git')
-	call dein#add('tpope/vim-projectionist.git')
-	call dein#add('rodjek/vim-puppet.git')
-	call dein#add('tpope/vim-ragtag.git')
-	call dein#add('tpope/vim-rails.git')
-	call dein#add('tpope/vim-rbenv.git')
-	call dein#add('vim-ruby/vim-ruby.git')
+	"call dein#add('tpope/vim-bundler.git')
+	"call dein#add('tpope/vim-cucumber.git')
+	"call dein#add('tpope/vim-dispatch.git')
+	"call dein#add('tpope/vim-fireplace.git')
+	"call dein#add('facebook/vim-flow.git')
+	"call dein#add('pangloss/vim-javascript.git')
+	"call dein#add('mxw/vim-jsx.git')
+	"call dein#add('lepture/vim-jinja.git')
+	"call dein#add('elzr/vim-json.git')
+	"call dein#add('tpope/vim-characterize.git')
+	"call dein#add('tpope/vim-leiningen.git')
+	"call dein#add('tpope/vim-markdown.git')
+	"call dein#add('tpope/vim-projectionist.git')
+	"call dein#add('rodjek/vim-puppet.git')
+	"call dein#add('tpope/vim-ragtag.git')
+	"call dein#add('tpope/vim-rails.git')
+	"call dein#add('tpope/vim-rbenv.git')
+	"call dein#add('vim-ruby/vim-ruby.git')
 	call dein#add('tpope/vim-surround.git')
 	call dein#add('tpope/vim-unimpaired.git')
-	call dein#add('jimenezrick/vimerl')
+	"call dein#add('jimenezrick/vimerl')
 	call dein#add('Quramy/vison.git')
+	call dein#config('vison.vim', {
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
 	call dein#add('hashivim/vim-terraform')
 	call dein#add('Shougo/unite.vim.git')
-	call dein#add('elmcast/elm-vim')
-	call dein#add('slim-template/vim-slim.git')
-	call dein#add('KabbAmine/zeavim.vim')
+	"call dein#add('elmcast/elm-vim')
+	"call dein#add('slim-template/vim-slim.git')
+	"call dein#add('KabbAmine/zeavim.vim')
 	call dein#add('scrooloose/nerdtree.git')
-	call dein#add('Shougo/vimshell')
 	call dein#add('zchee/deoplete-go', { 'build': 'make' })
 	call dein#add('majutsushi/tagbar')
-	call dein#add('fatih/vim-go', {'rev': 'v1.11'})
+	call dein#add('fatih/vim-go', {'rev': 'v1.12'})
+	call dein#config('go.vim', {
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\})
 	call dein#add('zchee/deoplete-jedi')
+	call dein#config('jedi-deoplete.vim', {
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
 	call dein#add('davidhalter/jedi-vim')
+	call dein#config('jedi-vim.vim', { 
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
 	call dein#add('lambdalisue/vim-pyenv', {'merged': 0})
 	call dein#add('carlitux/deoplete-ternjs', {'build': 'npm i -g tern'})
+	call dein#config('deoplete-ternjs.vim', { 
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
 	call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
-	call dein#add('Omnisharp/omnisharp-vim', {'build': 'sh -c "cd server && xbuild"'})
+	call dein#config('tern_for_vim.vim', { 
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
+	"call dein#add('Omnisharp/omnisharp-vim', {'build': 'sh -c "cd server && xbuild"'})
 	call dein#add('rust-lang/rust.vim')
+	call dein#config('rust.vim', { 
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
 	call dein#add('racer-rust/vim-racer')
+	call dein#config('vim-racer.vim', { 
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
 	call dein#add('sebastianmarkow/deoplete-rust')
+	call dein#config('deoplete-rust.vim', { 
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
 	call dein#add('uarun/vim-protobuf')
+	call dein#config('vim-protobuf.vim', { 
+				\ 'lazy': 1, 'on_event': 'InsertEnter',
+				\ })
+
 
 	" Required:
 	call dein#end()
@@ -95,6 +125,8 @@ syntax enable
 "if dein#check_install()
 "  call dein#install()
 "endif
+
+let g:dein#enable_notification=1
 
 "End dein Scripts-------------------------
 
@@ -226,6 +258,8 @@ augroup fsharp
     autocmd FileType fsharp nnoremap <buffer> <leader>c :FsiClear<Enter>
 augroup END
 
+let g:syntastic_fsharp_checkers = ['syntax']
+let g:fsharpbinding_debug = 1
 let g:fsharp_completion_helptext = 1
 
 " elm
@@ -293,13 +327,15 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 let g:go_term_enabled = 1
 let g:go_term_mode = "split"
+"let g:go_metalinter_command = "gometalinter.v1"
+let g:go_metalinter_enabled = ['vet', 'vetshadow', 'golint', 'ineffassign', 'goconst', 'gofmt']
 
 " neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-let g:neosnippet#snippets_directory = "$XDG_CONFIG_HOME/nvim/snippets"
+let g:neosnippet#snippets_directory = "~/.config/nvim/snippets"
 
 " yaml
 au FileType yaml set shiftwidth=2
