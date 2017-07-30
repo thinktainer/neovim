@@ -48,7 +48,7 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
 	"call dein#add('mxw/vim-jsx.git')
 	"call dein#add('lepture/vim-jinja.git')
 	"call dein#add('elzr/vim-json.git')
-	"call dein#add('tpope/vim-characterize.git')
+	call dein#add('tpope/vim-characterize.git')
 	"call dein#add('tpope/vim-leiningen.git')
 	"call dein#add('tpope/vim-markdown.git')
 	"call dein#add('tpope/vim-projectionist.git')
@@ -328,7 +328,7 @@ let g:go_fmt_command = "goimports"
 let g:go_term_enabled = 1
 let g:go_term_mode = "split"
 "let g:go_metalinter_command = "gometalinter.v1"
-let g:go_metalinter_enabled = ['vet', 'vetshadow', 'golint', 'ineffassign', 'goconst', 'gofmt']
+let g:go_metalinter_enabled = ['vet', 'vetshadow', 'deadcode', 'varcheck', 'structcheck', 'errcheck', 'golint', 'ineffassign', 'goconst', 'gofmt', 'safesql']
 
 " neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -352,7 +352,9 @@ let loaded_matchparen = 1
 vnoremap <Leader>64e c <c-r>=system('base64 -w0', @")<cr><esc>
 vnoremap <Leader>64d c <c-r>=system('base64 --decode', @")<cr><esc>
 
+" Rust
 let g:deoplete#sources#rust#racer_binary='/home/thinktainer/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/home/thinktainer/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 let g:syntastic_rust_checkers=['rustc']
 
+au BufRead,BufNewFile *.jcl set filetype=jcl
