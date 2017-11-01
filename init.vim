@@ -15,7 +15,7 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
 	call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
 	call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-	"call dein#add('fsharp/vim-fsharp', {'build': 'make fsautocomplete', 'rev': 'af5c5d810ebf38d907129f8c37bd3aeedf3869bd'})
+	call dein#add('fsharp/vim-fsharp', {'build': 'make'})
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('Townk/vim-autoclose.git')
 	call dein#add('chriskempson/base16-vim.git')
@@ -121,6 +121,8 @@ endif
 filetype plugin indent on
 syntax enable
 
+set mouse=a
+
 " If you want to install not installed plugins on startup.
 "if dein#check_install()
 "  call dein#install()
@@ -189,7 +191,7 @@ let NERDTreeIgnore=['\.beam$', '\~$']
 
 " airline
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16'
+let g:airline_theme='laederon'
 
 "editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -209,14 +211,26 @@ call unite#custom#source(
         \ 'file,file/new,buffer,file_rec,file_rec/neovim',
         \ 'matchers', 'matcher_fuzzy')
 call unite#custom#source('file/rec_neovim,file_rec,file_rec/async', 'ignore_pattern', 'node_modules/')
-if executable('ag')
-  " Use ag (the silver searcher)
-  " https://github.com/ggreer/the_silver_searcher
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-  \ '-i --vimgrep --hidden --ignore ' .
-  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
+
+if executable('rg')
+	let g:unite_source_grep_command = 'rg'
+	let g:unite_source_grep_default_opts = '--hidden --no-heading --vimgrep -S --glob !.git/ --glob !.svn/ --glob !.bzr/'
+	let g:unite_source_grep_recursive_opt = ''
+elseif executable('ag')
+	" Use ag (the silver searcher)
+	" https://github.com/ggreer/the_silver_searcher
+	let g:unite_source_grep_command = 'ag'
+	let g:unite_source_grep_default_opts =
+	\ '-i --vimgrep --hidden --ignore ' .
+	\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+	let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack')
+    " Use ack
+    " http://beyondgrep.com/
+    let g:unite_source_grep_command = 'ack'
+    let g:unite_source_grep_default_opts =
+                \ '-i --no-heading --no-color -H'
+    let g:unite_source_grep_recursive_opt = ''
 endif
 
 "use deoplete
@@ -240,15 +254,6 @@ nnoremap <silent><Leader>o :Unite -start-insert file_rec/neovim<CR>
 nnoremap <silent><Leader>g :Unite grep:
 
 
-if executable('ack')
-    " Use ack
-    " http://beyondgrep.com/
-    let g:unite_source_grep_command = 'ack'
-    let g:unite_source_grep_default_opts =
-                \ '-i --no-heading --no-color -H'
-    let g:unite_source_grep_recursive_opt = ''
-endif
-
 " F#, fsharp
 augroup fsharp
     au!
@@ -259,7 +264,7 @@ augroup fsharp
 augroup END
 
 let g:syntastic_fsharp_checkers = ['syntax']
-let g:fsharpbinding_debug = 1
+let g:fsharpbinding_debug = 0
 let g:fsharp_completion_helptext = 1
 
 " elm
@@ -318,6 +323,7 @@ au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gr <Plug>(go-rename)
 au FileType go nmap <Leader>l <Plug>(go-metalinter)
 au FileType go nmap <Leader>ct <Plug>(go-test-compile)
+au FileType go setlocal ts=8 sw=8 noet nolist
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -329,6 +335,8 @@ let g:go_term_enabled = 1
 let g:go_term_mode = "split"
 "let g:go_metalinter_command = "gometalinter.v1"
 let g:go_metalinter_enabled = ['vet', 'vetshadow', 'deadcode', 'varcheck', 'structcheck', 'errcheck', 'golint', 'ineffassign', 'goconst', 'gofmt', 'safesql']
+
+let g:deoplete#sources#go#gocode_binary = "~/code/go/bin/gocode"
 
 " neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -357,4 +365,4 @@ let g:deoplete#sources#rust#racer_binary='/home/thinktainer/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/home/thinktainer/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 let g:syntastic_rust_checkers=['rustc']
 
-au BufRead,BufNewFile *.jcl set filetype=jcl
+autocmd BufNewFile,BufRead,BufEnter *.jcl,*PP@.[tT][xX][tT],*[jJ][cC]@.[tT][xX][tT] setl ft=jcl
