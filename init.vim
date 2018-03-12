@@ -22,7 +22,7 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
         \ })
   call dein#add('autozimu/LanguageClient-neovim', {
         \ 'rev': 'next',
-        \ 'build': './install.sh',
+        \ 'build': 'bash install.sh',
         \})
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-go', { 'build': 'make' })
@@ -110,6 +110,7 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
         \ })
   call dein#add('cespare/vim-toml')
   call dein#add('dbgx/lldb.nvim')
+  call dein#add('wannesm/wmgraphviz.vim')
   " Required:
   call dein#end()
   call dein#save_state()
@@ -387,16 +388,26 @@ autocmd BufReadPost *.rs setlocal filetype=rust
 "au FileType rust nmap gx <Plug>(rust-def-vertical)
 "au FileType rust nmap <leader>gd <Plug>(rust-doc)<Paste>
 
-let g:LanguageClient_autoStart=1
+"let g:LanguageClient_autoStart=1
 let g:LanguageClient_serverCommands = {
       \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
       \ }
 
+let g:LanguageClient_rootMarkers = {
+      \ 'rust': ['Cargo.toml'],
+      \}
+let g:LanguageClient_selectionUI="location-list"
+let g:LanguageClient_trace="messages"
+let g:LanguageClient_diagnosticsEnable=1
+let g:LanguageClient_windowLogMessageLevel="Info"
+let g:LanguageClient_loggingLevel='WARN'
+
 augroup rust
   au!
-  au FileType rust nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-  au FileType rust nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-  au FileType rust nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-  au FileType rust nnoremap <silent> <Leader>r :RustRun<CR>
+  au FileType rust nnoremap <buffer><silent> K :call LanguageClient_textDocument_hover()<CR>
+  au FileType rust nnoremap <buffer><silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
+  au FileType rust nnoremap <buffer><silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+  au FileType rust nnoremap <buffer><silent> <Leader>l :call LanguageClient_textDocument_formatting()<CR>
+  au FileType rust nnoremap <buffer><silent> <Leader>r :RustRun<CR>
   au FileType rust set formatexpr=LanguageClient_textDocument_rangeFormatting()
 augroup END
