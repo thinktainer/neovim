@@ -16,10 +16,7 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-  call dein#add('fsharp/vim-fsharp', {
-        \ 'build': 'make',
-        \ 'lazy': 1, 'on_event': 'InsertEnter',
-        \ })
+  call dein#add('fsharp/vim-fsharp')
   call dein#add('autozimu/LanguageClient-neovim', {
         \ 'rev': 'next',
         \ 'build': 'bash install.sh',
@@ -62,13 +59,12 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
   "call dein#add('tpope/vim-dispatch.git')
   "call dein#add('tpope/vim-fireplace.git')
   "call dein#add('facebook/vim-flow.git')
-  "call dein#add('pangloss/vim-javascript.git')
-  "call dein#add('mxw/vim-jsx.git')
+  call dein#add('pangloss/vim-javascript.git')
+  call dein#add('mxw/vim-jsx.git')
   "call dein#add('lepture/vim-jinja.git')
   "call dein#add('elzr/vim-json.git')
   call dein#add('tpope/vim-characterize.git')
   "call dein#add('tpope/vim-leiningen.git')
-  "call dein#add('tpope/vim-markdown.git')
   "call dein#add('tpope/vim-projectionist.git')
   "call dein#add('rodjek/vim-puppet.git')
   call dein#add('tpope/vim-ragtag.git')
@@ -90,7 +86,7 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
   call dein#add('scrooloose/nerdtree.git')
   call dein#add('majutsushi/tagbar')
   call dein#add('tomlion/vim-solidity')
-  call dein#add('fatih/vim-go', {'rev': 'v1.15'})
+  call dein#add('fatih/vim-go', {'branch': 'master'})
   call dein#config('go.vim', {
         \ 'lazy': 1, 'on_event': 'InsertEnter',
         \})
@@ -98,7 +94,9 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
   call dein#config('jedi-vim.vim', {
         \ 'lazy': 1, 'on_event': 'InsertEnter',
         \ })
-  call dein#add('lambdalisue/vim-pyenv', {'merged': 0})
+  "call dein#config('lambdalisue/vim-pyenv', {
+        "\ 'lazy': 1, 'on_ft': ['python', 'python3'] })
+  "call dein#add('lambdalisue/vim-pyenv', {'merged': 0})
   call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
   call dein#config('tern_for_vim.vim', {
         \ 'lazy': 1, 'on_event': 'InsertEnter',
@@ -111,6 +109,7 @@ if dein#load_state(expand('/home/thinktainer/.config/nvim/plugins/dein.vim'))
   call dein#add('cespare/vim-toml')
   call dein#add('dbgx/lldb.nvim')
   call dein#add('wannesm/wmgraphviz.vim')
+  call dein#add('iamcco/markdown-preview.vim')
   " Required:
   call dein#end()
   call dein#save_state()
@@ -130,6 +129,10 @@ set mouse=a
 let g:dein#enable_notification=1
 
 "End dein Scripts-------------------------
+
+"splits
+
+set splitbelow splitright
 
 "leader
 let mapleader=","
@@ -247,10 +250,6 @@ if !exists('g:deoplete#omni_input_patterns)')
 endif
 let g:deoplete#omni_input_patterns.fsharp = '\.'
 
-if !exists('g:deoplete#omni_patterns')
-  let g:deoplete#omni_patterns = {}
-endif
-let g:deoplete#omni_patterns.fsharp = '\.'
 "unite
 nnoremap <silent><Leader>b :Denite buffer -mode=normal<CR>
 nnoremap <silent><Leader>o :Denite file_rec<CR>
@@ -270,8 +269,8 @@ augroup fsharp
   autocmd FileType fsharp nnoremap <buffer> <leader>c :FsiClear<Enter>
 augroup END
 
-let g:syntastic_fsharp_checkers = ['syntax']
-let g:fsharpbinding_debug = 0
+"let g:syntastic_fsharp_checkers = ['syntax']
+let g:fsharpbinding_debug = 1
 let g:fsharp_completion_helptext = 1
 
 " elm
@@ -333,6 +332,8 @@ au FileType go nmap <LocalLeader>gr <Plug>(go-rename)
 au FileType go nmap <LocalLeader>l <Plug>(go-metalinter)
 au FileType go nmap <LocalLeader>ct <Plug>(go-test-compile)
 au FileType go setlocal ts=8 sw=8 noet nolist
+au FileType go setlocal foldmethod=syntax
+au FileType go setlocal foldlevelstart=100
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -342,10 +343,12 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 let g:go_term_enabled = 1
 let g:go_term_mode = "split"
-let g:go_metalinter_command = "gometalinter.v1"
-let g:go_metalinter_enabled = ['vet', 'vetshadow', 'deadcode', 'varcheck', 'structcheck', 'errcheck', 'golint', 'ineffassign', 'goconst', 'gofmt', 'safesql']
+"let g:go_metalinter_command = "/home/thinktainer/code/go/bin/gometalinter.v2"
+let g:go_metalinter_enabled = ['vet', 'vetshadow', 'deadcode', 'varcheck', 'structcheck', 'errcheck', 'golint', 'ineffassign', 'goconst', 'gofmt']
+let g:go_metalinter_deadline = "10s"
 
-"let g:deoplete#sources#go#gocode_binary = "~/code/go/bin/gocode"
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 " neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -370,11 +373,6 @@ vnoremap <Leader>64e c <c-r>=system('base64 -w0', @")<cr><esc>
 vnoremap <Leader>64d c <c-r>=system('base64 --decode', @")<cr><esc>
 
 autocmd BufNewFile,BufRead,BufEnter *.jcl,*PP@.[tT][xX][tT],*[jJ][cC]@.[tT][xX][tT] setl ft=jcl
-
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-au BufRead,BufNewFile *.ml,*.mli compiler ocaml
-au FileType ocaml let maplocalleader = ","
 
 " Rust
 autocmd BufReadPost *.rs setlocal filetype=rust
@@ -411,3 +409,5 @@ augroup rust
   au FileType rust nnoremap <buffer><silent> <Leader>r :RustRun<CR>
   au FileType rust set formatexpr=LanguageClient_textDocument_rangeFormatting()
 augroup END
+
+let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}

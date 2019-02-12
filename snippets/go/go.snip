@@ -9,4 +9,16 @@ options     indent
         }),
         ${0}
 
+snippet errw
+alias wrap error
+options indent
+        if err != nil {
+                return errors.Wrap(err, "${1:message}")
+        }
+        ${0}
 
+snippet hand
+options indent
+        func(w http.ResponseWriter, req *http.Request) {
+                ${0}
+        }
