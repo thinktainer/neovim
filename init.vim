@@ -24,7 +24,6 @@ if dein#load_state('/home/thinktainer/.local/share/dein')
   call dein#config('jedi-deoplete.vim', {
         \ 'lazy': 1, 'on_event': 'InsertEnter',
         \ })
-  call dein#add('carlitux/deoplete-ternjs', {'build': 'npm i -g tern'})
   call dein#add('Townk/vim-autoclose.git')
   call dein#add('chriskempson/base16-vim.git')
   call dein#add('tpope/vim-fugitive.git')
@@ -60,18 +59,14 @@ if dein#load_state('/home/thinktainer/.local/share/dein')
   call dein#config('jedi-vim.vim', {
         \ 'lazy': 1, 'on_event': 'InsertEnter',
         \ })
-  call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
-  call dein#config('tern_for_vim.vim', {
-        \ 'lazy': 1, 'on_event': 'InsertEnter',
-        \ })
   call dein#add('uarun/vim-protobuf')
   call dein#config('vim-protobuf.vim', {
         \ 'lazy': 1, 'on_event': 'InsertEnter',
         \ })
   call dein#add('cespare/vim-toml')
-  call dein#add('dbgx/lldb.nvim')
   call dein#add('wannesm/wmgraphviz.vim')
   call dein#add('iamcco/markdown-preview.vim')
+  call dein#add('rust-lang/rust.vim')
 
   " Required:
   call dein#end()
@@ -119,7 +114,6 @@ set undofile
 
 " NERDTree
 let NERDTreeChDirMode=2
-nnoremap <Leader>f :NERDTreeFind<ENTER><C-w><C-p>
 nnoremap <Leader>n :NERDTreeToggle<Enter>
 
 
@@ -127,26 +121,9 @@ nnoremap <Leader>n :NERDTreeToggle<Enter>
 au FileType html set sw=2 ts=2 et
 
 
-" javascript
-let g:flow#autoclose=1
-au FileType javascript setl sw=2 et
-let g:syntastic_javascript_checkers = ['eslint']
-let g:jsx_ext_required = 0
-"autocmd bufwritepost *.js silent !standard-format -w %
-let g:syntastic_json_checkers = ['jsonlint']
-let g:tern_request_timeout = 1
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
 au BufRead,BufNewFile *.json set filetype=json
 au FileType json setl sw=2 ts=2 et
-au FileType javascript let maplocalleader=","
 
-augroup js
-  au!
-  au FileType javascript nnoremap <c-]> :TernDef<CR>
-  au FileType javascript nnoremap K :TernDoc<CR>
-  au FileType javascript nnoremap <LocalLeader>r :TernRename<CR>
-augroup END
 
 " reload changed files automatically
 set autoread
@@ -161,7 +138,7 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='laederon'
 
 "editorconfig
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+"let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
 
 "tslime
@@ -191,15 +168,36 @@ endif
 "deoplete.nvim recommend
 "set completeopt+=noselect
 let g:deoplete#enable_at_startup=1
+call deoplete#custom#source('LanguageClient', 
+      \ 'min_pattern_length',
+      \ 2)
 
-"Denite
-nnoremap <silent><Leader>b :Denite buffer -mode=normal<CR>
-nnoremap <silent><Leader>o :Denite file/rec<CR>
-nnoremap <silent><Leader>g :Denite grep:
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> v
+  \ denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> s
+  \ denite#do_map('do_action', 'split')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
 
 call denite#custom#option('default', {
       \ 'direction': 'dynamictop'
       \})
+
+nnoremap <Leader>b :call denite#start([{'name': 'buffer', 'args': []}])<CR>
 
 
 " terraform
@@ -293,6 +291,9 @@ autocmd BufReadPost *.rs setlocal filetype=rust
 let g:LanguageClient_serverCommands = {
       \ 'rust': ['rustup', 'run', 'stable', 'rls'],
       \ 'go': ['gopls'],
+      \ 'javascript': ['/home/thinktainer/.nvm/versions/node/v10.16.2/bin/javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['/home/thinktainer/.nvm/versions/node/v10.16.2/bin/javascript-typescript-stdio'],
+      \ 'typescript': ['/home/thinktainer/.nvm/versions/node/v10.16.2/bin/javascript-typescript-stdio'],
       \ }
 
 let g:LanguageClient_rootMarkers = {
@@ -311,6 +312,7 @@ let g:LanguageClient_windowLogMessageLevel="Warning"
 let g:LanguageClient_loggingLevel='WARN'
 
 nnoremap <Leader>t i<C-v>u2713<esc>
+nnoremap <silent> <Leader>m :make build<CR>
 
 function LC_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
@@ -318,10 +320,17 @@ function LC_maps()
     nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
     nnoremap <buffer> <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
     nnoremap <buffer> <silent> <Leader>gr :call LanguageClient_textDocument_rename()<CR>
-    nnoremap <buffer> <silent> <Leader>l :call LanguageClient_textDocument_formatting()<CR>
+    nnoremap <buffer> <silent> <Leader>f :call LanguageClient_textDocument_formatting()<CR>
   endif
 endfunction
 
 autocmd FileType * call LC_maps()
 
 let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
+au FileType cucumber set sw=2 ts=2 et
+
+try
+  source ~/.config/nvim/terminal.vim
+  source ~/.config/nvim/javascript.vim
+catch
+endtry
